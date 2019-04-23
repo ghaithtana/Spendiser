@@ -57,7 +57,7 @@ public class Income {
 	
 	public String getFormatedDate(){
 		
-		DateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 		return dateformat.format(date);
 	}
 
