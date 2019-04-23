@@ -1,5 +1,7 @@
 package Model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Outcome {
@@ -11,6 +13,15 @@ public class Outcome {
 	private int c_id;
 	private int a_id;
 
+	public Outcome(double amount, String description, Date date, int c_id,
+			int a_id) {
+		setAmount(amount);
+		setDescription(description);
+		setDate(date);
+		setC_id(c_id);
+		setA_id(a_id);
+	}
+
 	public Outcome(int id, double amount, String description, Date date,
 			int c_id, int a_id) {
 		setId(id);
@@ -19,7 +30,6 @@ public class Outcome {
 		setDate(date);
 		setC_id(c_id);
 		setA_id(a_id);
-
 	}
 
 	public int getId() {
@@ -50,6 +60,11 @@ public class Outcome {
 		return date;
 	}
 
+	public String getFormatedDate() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		return dateFormat.format(date);
+	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
@@ -59,7 +74,7 @@ public class Outcome {
 	}
 
 	public void setC_id(int c_id) {
-		c_id = c_id;
+		this.c_id = c_id;
 	}
 
 	public int getA_id() {
@@ -67,7 +82,7 @@ public class Outcome {
 	}
 
 	public void setA_id(int a_id) {
-		a_id = a_id;
+		this.a_id = a_id;
 	}
 
 }
