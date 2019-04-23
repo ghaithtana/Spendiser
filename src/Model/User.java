@@ -7,16 +7,16 @@ import Controller.Utils;
 
 public class User {
 
-	private int U_ID;
-	private String username;
-	private String password;
-	private String name;
-	private int gender;
-	private Date birthdate;
+	protected int u_id;
+	protected String username;
+	protected String password;
+	protected String name;
+	protected int gender;
+	protected Date birthdate;
 
 	public User(int ID, String username, String password, String name,
 			int gender, Date birthdate) {
-		this.U_ID = ID;
+		this.u_id = ID;
 		this.username = username.toLowerCase();
 		this.password = password;
 		this.gender = gender;
@@ -35,7 +35,7 @@ public class User {
 	}
 
 	public int getU_ID() {
-		return U_ID;
+		return u_id;
 	}
 
 	public String getUsername() {
