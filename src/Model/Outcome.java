@@ -61,7 +61,7 @@ public class Outcome {
 	}
 
 	public String getFormatedDate() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		return dateFormat.format(date);
 	}
 

@@ -19,7 +19,7 @@ public class OutcomeManager {
 
 	public void insertOutcome(Outcome o) throws SQLException {
 		String sql = String.format(
-				"INSERT INTO Outcome (Amount,Description,Date,C_ID,A_ID) VALUES (%f, '%s', '%s', %d, %d)",
+				"EXEC [InsertOutcome] %f, '%s', '%s', %d, %d",
 				o.getAmount(), o.getDescription(), o.getFormatedDate(), o.getC_id(), o.getA_id());
 
 		DatabaseManager.instance.query(sql);
@@ -28,7 +28,9 @@ public class OutcomeManager {
 	public ArrayList<Outcome> getAllOutcomes() throws SQLException {
 		ArrayList<Outcome> list = new ArrayList<Outcome>();
 
-		String sql = "select * from outcome";
+		String sql = String.format(
+				"SELECT * FROM Outcome AS O INNER JOIN FinancialAccount AS F ON O.A_ID=F.A_ID AND F.U_ID =%d",
+				UserManager.instance.getCurrentUser().getU_ID());
 		ResultSet rs = DatabaseManager.instance.select(sql);
 
 		while (rs.next()) {
