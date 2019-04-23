@@ -26,4 +26,11 @@ public class DatabaseManager {
 		ResultSet rs = sta.executeQuery(sql);
 		return rs;
 	}
+
+	public void query(String sql) throws SQLException {
+
+		Statement sta = conn.createStatement();
+		sta.executeUpdate(sql);
+
+	}
 }
