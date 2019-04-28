@@ -6,10 +6,12 @@ public class Category {
 	private String name;
 
 	public Category(int id, String name) {
-
 		setId(id);
 		setName(name);
-
+	}  
+	
+	public Category( String name) {
+		setName(name);
 	}
 
 	public int getId() {
