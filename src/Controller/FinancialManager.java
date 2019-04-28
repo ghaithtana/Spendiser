@@ -9,8 +9,8 @@ public class FinancialManager {
 	private FinancialManager() {
 	}
 
-	public double getBalance(int id) throws SQLException {
-		String sql = String.format("SELECT dbo.GETBALANCE(%d) As Balance ", id);
+	public double getBalance() throws SQLException {
+		String sql = String.format("SELECT dbo.GETBALANCE(%d) As Balance ", UserManager.instance.getCurrentUser().getU_ID());
 		ResultSet rs = DatabaseManager.instance.select(sql);
 
 		if (rs.next()) {
