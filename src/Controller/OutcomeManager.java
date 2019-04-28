@@ -18,9 +18,8 @@ public class OutcomeManager {
 	}
 
 	public void insertOutcome(Outcome o) throws SQLException {
-		String sql = String.format(
-				"EXEC [InsertOutcome] %f, '%s', '%s', %d, %d",
-				o.getAmount(), o.getDescription(), o.getFormatedDate(), o.getC_id(), o.getA_id());
+		String sql = String.format("EXEC [InsertOutcome] %f, '%s', '%s', %d, %d", o.getAmount(), o.getDescription(),
+				o.getFormatedDate(), o.getC_id(), o.getA_id());
 
 		DatabaseManager.instance.query(sql);
 	}
@@ -41,13 +40,12 @@ public class OutcomeManager {
 		return list;
 	}
 
-	public ArrayList<Outcome> getOutcomes(Category category, Date startDate, Date endDate, Account account)
-			throws SQLException {
+	public ArrayList<Outcome> getOutcomes(int cid, int aid, Date startDate, Date endDate) throws SQLException {
 
 		ArrayList<Outcome> list = new ArrayList<Outcome>();
 		String sql = String.format(
-				"SELECT * FROM Outcome WHERE (C_ID= '%d' AND [Date] BETWEEN '%s' AND '%s')AND A_ID='%d'",
-				category.getId(), Utils.dateToString(startDate), Utils.dateToString(endDate), account.getId());
+				"SELECT * FROM Outcome WHERE (C_ID= '%d' AND [Date] BETWEEN '%s' AND '%s')AND A_ID='%d'", cid,
+				Utils.dateToString(startDate), Utils.dateToString(endDate), aid);
 
 		ResultSet rs = DatabaseManager.instance.select(sql);
 
