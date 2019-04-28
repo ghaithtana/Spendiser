@@ -18,8 +18,8 @@ public class IncomeManager {
 
 	public void insertIncome(Income i) throws SQLException {
 
-		String sql = String.format("EXEC [InsertIncome] %f,'%s','%s',%d",
-				i.getAmount(), i.getDescription(), i.getFormatedDate(), i.getA_ID());
+		String sql = String.format("EXEC [InsertIncome] %f,'%s','%s',%d", i.getAmount(), i.getDescription(),
+				i.getFormatedDate(), i.getA_ID());
 
 		DatabaseManager.instance.query(sql);
 
@@ -42,11 +42,11 @@ public class IncomeManager {
 		return list;
 	}
 
-	public ArrayList<Income> getIncomes(Date startDate, Date endDate, Account account) throws SQLException {
+	public ArrayList<Income> getIncomes(int aid, Date startDate, Date endDate) throws SQLException {
 
 		ArrayList<Income> list = new ArrayList<Income>();
 		String sql = String.format("SELECT * FROM Income WHERE ([Date] BETWEEN '%s' AND '%s')AND A_ID='%d'",
-				Utils.dateToString(startDate), Utils.dateToString(endDate), account.getId());
+				Utils.dateToString(startDate), Utils.dateToString(endDate), aid);
 
 		ResultSet rs = DatabaseManager.instance.select(sql);
 
