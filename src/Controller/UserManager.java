@@ -23,7 +23,7 @@ public class UserManager {
 			throw new Exception("Taken username");
 		} else {
 			String sql = String.format(
-					"INSERT INTO [User] (Username,Password,Name,Gender,Birthdate, 0) VALUES ('%s','%s','%s',%d,'%s')",
+					"INSERT INTO [User] (Username,Password,Name,Gender,Birthdate, IsPremium) VALUES ('%s','%s','%s',%d,'%s', 0)",
 					u.getUsername(), u.getPassword(), u.getName(), u.getGender(), u.getFormatedDate());
 
 			DatabaseManager.instance.query(sql);
