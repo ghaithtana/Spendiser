@@ -22,9 +22,9 @@ public class UserManager {
 		if (user != null) {
 			throw new Exception("Taken username");
 		} else {
-			String sql = String.format(
-					"INSERT INTO [User] (Username,Password,Name,Gender,Birthdate, IsPremium) VALUES ('%s','%s','%s',%d,'%s', 0)",
-					u.getUsername(), u.getPassword(), u.getName(), u.getGender(), u.getFormatedDate());
+			String sql = String
+					.format("INSERT INTO [User] (Username,Password,Name,Gender,Birthdate, IsPremium) VALUES ('%s','%s','%s',%d,'%s', 0)",
+							u.getUsername(), u.getPassword(), u.getName(), u.getGender(), u.getFormatedDate());
 
 			DatabaseManager.instance.query(sql);
 		}
@@ -56,8 +56,22 @@ public class UserManager {
 		return null;
 	}
 
+	public boolean checkPremium(User u) throws SQLException {
+
+		String sql = String.format("SELECT IsPremium FROM [User] WHERE U_ID =%d", u.getU_ID());
+		ResultSet rs = DatabaseManager.instance.select(sql);
+		while (rs.next()) {
+			boolean isPremium = rs.getBoolean("IsPremium");
+
+			return isPremium;
+
+		}
+		return false;
+
+	}
+
 	public void upgradeUser() throws SQLException {
-		String sql = String.format("EXEC [UpgardeUserToPermium] '%d''", currentUser.getU_ID());
+		String sql = String.format("EXEC [UpgardeUserToPermium] '%d'", currentUser.getU_ID());
 		DatabaseManager.instance.query(sql);
 		currentUser = new PremiumUser(currentUser);
 	}
