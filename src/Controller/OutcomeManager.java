@@ -57,6 +57,21 @@ public class OutcomeManager {
 		return list;
 	}
 
+	public ArrayList<Outcome> getCurrentMonthOutcomes(int cid, int aid) throws SQLException {
+
+		ArrayList<Outcome> list = new ArrayList<Outcome>();
+		String sql = String.format("SELECT * FROM CurrentMonthOutcome WHERE C_ID= '%d' AND A_ID='%d'", cid, aid);
+
+		ResultSet rs = DatabaseManager.instance.select(sql);
+
+		while (rs.next()) {
+			Outcome outcome = getOutcomeFromResultSet(rs);
+			list.add(outcome);
+		}
+
+		return list;
+	}
+
 	private Outcome getOutcomeFromResultSet(ResultSet rs) throws SQLException {
 
 		int id = rs.getInt("O_ID");
