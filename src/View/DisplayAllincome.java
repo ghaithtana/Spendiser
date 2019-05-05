@@ -6,10 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class DisplayAllincome extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -32,11 +36,23 @@ public class DisplayAllincome extends JFrame {
 	 */
 	public DisplayAllincome() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 601);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		table = new JTable();
+		table.setBounds(15, 55, 548, 474);
+		contentPane.add(table);
+		
+		JLabel lblIncomeManager = new JLabel("Income Manager");
+		lblIncomeManager.setBounds(230, 16, 123, 20);
+		contentPane.add(lblIncomeManager);
+		
+		JButton button = new JButton("< Back");
+		button.setBounds(15, 12, 115, 29);
+		contentPane.add(button);
 	}
 
 }
