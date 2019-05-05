@@ -105,4 +105,5 @@ public class SingUpp {
 		btnFemale.setText("Female");
 
 	}
+	
 }
