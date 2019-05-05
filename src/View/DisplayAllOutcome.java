@@ -6,11 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 import javax.swing.JButton;
 
-public class OutcomeManagerM extends JFrame {
+public class DisplayAllOutcome extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -19,7 +23,7 @@ public class OutcomeManagerM extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OutcomeManagerM frame = new OutcomeManagerM();
+					DisplayAllOutcome frame = new DisplayAllOutcome();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,26 +35,25 @@ public class OutcomeManagerM extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OutcomeManagerM() {
-		setTitle("Outcome Manager");
+	public DisplayAllOutcome() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 602, 599);
+		setBounds(100, 100, 598, 601);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Show all outcomes");
-		btnNewButton.setBounds(188, 227, 199, 69);
-		contentPane.add(btnNewButton);
+		JLabel lblNewLabel = new JLabel("Outcome manager");
+		lblNewLabel.setBounds(215, 16, 131, 20);
+		contentPane.add(lblNewLabel);
 		
-		JButton btnInsertOutcome = new JButton("Insert outcome");
-		btnInsertOutcome.setBounds(188, 98, 199, 69);
-		contentPane.add(btnInsertOutcome);
+		table = new JTable();
+		table.setBounds(15, 45, 546, 484);
+		contentPane.add(table);
 		
-		JButton btnShowFilterdOutcomes = new JButton("Show Filterd outcomes");
-		btnShowFilterdOutcomes.setBounds(188, 359, 199, 69);
-		contentPane.add(btnShowFilterdOutcomes);
+		button = new JButton("< Back");
+		button.setBounds(15, 12, 115, 29);
+		contentPane.add(button);
 	}
 
 }

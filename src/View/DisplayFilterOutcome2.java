@@ -6,11 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTable;
 
-public class OutcomeManagerM extends JFrame {
+public class DisplayFilterOutcome2 extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -19,7 +21,7 @@ public class OutcomeManagerM extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OutcomeManagerM frame = new OutcomeManagerM();
+					DisplayFilterOutcome2 frame = new DisplayFilterOutcome2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,26 +33,21 @@ public class OutcomeManagerM extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OutcomeManagerM() {
-		setTitle("Outcome Manager");
+	public DisplayFilterOutcome2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 602, 599);
+		setBounds(100, 100, 601, 601);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Show all outcomes");
-		btnNewButton.setBounds(188, 227, 199, 69);
-		contentPane.add(btnNewButton);
+		JLabel lblOutcomeManager = new JLabel("Outcome Manager");
+		lblOutcomeManager.setBounds(215, 16, 136, 20);
+		contentPane.add(lblOutcomeManager);
 		
-		JButton btnInsertOutcome = new JButton("Insert outcome");
-		btnInsertOutcome.setBounds(188, 98, 199, 69);
-		contentPane.add(btnInsertOutcome);
-		
-		JButton btnShowFilterdOutcomes = new JButton("Show Filterd outcomes");
-		btnShowFilterdOutcomes.setBounds(188, 359, 199, 69);
-		contentPane.add(btnShowFilterdOutcomes);
+		table = new JTable();
+		table.setBounds(15, 49, 549, 480);
+		contentPane.add(table);
 	}
 
 }
