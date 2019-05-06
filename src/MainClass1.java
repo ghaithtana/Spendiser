@@ -11,6 +11,7 @@ import Controller.IncomeManager;
 import Controller.OutcomeManager;
 import Controller.UserManager;
 import Controller.Utils;
+import Controller.WrongInputexception;
 import Model.Account;
 import Model.Category;
 import Model.Income;
@@ -63,21 +64,37 @@ public class MainClass1 {
 				try {
 
 					ArrayList<Account> accounts = AccountManager.instance.getAllAccounts();
+
 					for (Account a : accounts) {
 						System.out.println(String.format("%d- %s", a.getId(), a.getName()));
 					}
+
+					if (accounts.isEmpty() == false) {
+						System.out.println("Enter the id of the account you want to delete ");
+						int accountid = scanner.nextInt();
+						int[] array = new int[10];
+
+						for (Account a : accounts) {
+							int i = 0;
+							i = i + 1;
+							while (accountid == a.getId()) {
+								AccountManager.instance.deleteAccount(accountid);
+								System.out.println("Your Financial account has been deleted successfully!..");
+								array[i] = a.getId();
+								break;
+
+							}
+
+						}
+
+					} else {
+						System.out.println("You have no financial account");
+					}
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 
-				System.out.println("Enter the id of the account you want to delete ");
-				int accountid = scanner.nextInt();
-				try {
-					AccountManager.instance.deleteAccount(accountid);
-					System.out.println("Your Financial account has been deleted successfully!..");
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
 				break;
 			}
 
@@ -118,6 +135,8 @@ public class MainClass1 {
 					System.out.println("Income added successfully!..");
 				} catch (SQLException e) {
 					e.printStackTrace();
+				} catch (WrongInputexception e) {
+					e.printStackTrace();
 				}
 
 				break;
@@ -130,7 +149,7 @@ public class MainClass1 {
 					incomes = IncomeManager.instance.getAllIncomes();
 					for (Income income : incomes) {
 						System.out
-								.println(String.format("Income: Amount: %f  Description:%s Date:%s  a_id:%d ",
+								.println(String.format("Income: Amount: %.3f $\t Description:%s\t Date:%s\t  a_id:%d ",
 										income.getAmount(), income.getDescription(), income.getFormatedDate(),
 										income.getA_ID()));
 					}
@@ -202,7 +221,11 @@ public class MainClass1 {
 					System.out.println("Outcome added successfully!..");
 				} catch (SQLException e) {
 					e.printStackTrace();
+				} catch (WrongInputexception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				
 
 				break;
 			}
@@ -235,7 +258,7 @@ public class MainClass1 {
 					ArrayList<Outcome> outcomes = OutcomeManager.instance.getOutcomes(cid, aid, sdate, edate);
 					for (Outcome outcome : outcomes) {
 						System.out.println(String.format(
-								"Outcome: Amount: %.3f  Description:%s Date:%s  C_id:%d  a_id:%d", outcome.getAmount(),
+								"Outcome: Amount: %.3f\t  Description:%s\t Date:%s\t  C_id:%d\t  a_id:%d\t", outcome.getAmount(),
 								outcome.getDescription(), outcome.getFormatedDate(), outcome.getC_id(),
 								outcome.getA_id()));
 					}
@@ -252,7 +275,7 @@ public class MainClass1 {
 					outcomes = OutcomeManager.instance.getAllOutcomes();
 					for (Outcome outcome : outcomes) {
 						System.out.println(String.format(
-								"Outcome: Amount: %f  Description:%s Date:%s  C_id:%d  a_id:%d", outcome.getAmount(),
+								"Outcome: Amount: %.3f $\t Description:%s\t Date:%s\t C_id:%d\t a_id:%d", outcome.getAmount(),
 								outcome.getDescription(), outcome.getFormatedDate(), outcome.getC_id(),
 								outcome.getA_id()));
 					}
