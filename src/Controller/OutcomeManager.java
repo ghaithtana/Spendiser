@@ -17,7 +17,7 @@ public class OutcomeManager {
 
 	}
 
-	public void insertOutcome(Outcome o) throws SQLException {
+	public void insertOutcome(Outcome o) throws SQLException,WrongInputexception {
 		String sql = String.format("EXEC [InsertOutcome] %f, '%s', '%s', %d, %d", o.getAmount(), o.getDescription(),
 				o.getFormatedDate(), o.getC_id(), o.getA_id());
 

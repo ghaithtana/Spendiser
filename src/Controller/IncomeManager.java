@@ -15,7 +15,7 @@ public class IncomeManager {
 
 	}
 
-	public void insertIncome(Income i) throws SQLException {
+	public void insertIncome(Income i) throws SQLException,WrongInputexception {
 
 		String sql = String.format("EXEC [InsertIncome] %f,'%s','%s',%d", i.getAmount(), i.getDescription(),
 				i.getFormatedDate(), i.getA_ID());
