@@ -11,12 +11,10 @@ import Controller.IncomeManager;
 import Controller.OutcomeManager;
 import Controller.UserManager;
 import Controller.Utils;
-import Controller.WrongInputexception;
 import Model.Account;
 import Model.Category;
 import Model.Income;
 import Model.Outcome;
-import Model.PremiumUser;
 import Model.User;
 
 public class MainClass1 {
@@ -26,8 +24,8 @@ public class MainClass1 {
 		int choice = 0;
 		do {
 			System.out.println("--------------------------------");
-			System.out.println(String.format("Welcome %s to your Spendiser", UserManager.instance.getCurrentUser()
-					.getName()));
+			System.out.println(
+					String.format("Welcome %s to your Spendiser", UserManager.instance.getCurrentUser().getName()));
 
 			System.out.println("Enter (1) to add Financial account");
 			System.out.println("Enter (2) to Delete Financial account");
@@ -64,33 +62,29 @@ public class MainClass1 {
 				try {
 
 					ArrayList<Account> accounts = AccountManager.instance.getAllAccounts();
-
 					for (Account a : accounts) {
 						System.out.println(String.format("%d- %s", a.getId(), a.getName()));
-					}
 
-					if (accounts.isEmpty() == false) {
+					}
+					if (accounts.isEmpty() == true) {
+						System.out.println("You have no accounts");
+						break;
+					} else {
 						System.out.println("Enter the id of the account you want to delete ");
 						int accountid = scanner.nextInt();
-						int[] array = new int[10];
-
-						for (Account a : accounts) {
-							int i = 0;
-							i = i + 1;
-							while (accountid == a.getId()) {
-								AccountManager.instance.deleteAccount(accountid);
-								System.out.println("Your Financial account has been deleted successfully!..");
-								array[i] = a.getId();
-								break;
-
+						try {
+							ArrayList<Account> accounts1 = AccountManager.instance.getAllAccounts();
+							for (Account a : accounts1) {
+								if (accountid == a.getId()) {
+									AccountManager.instance.deleteAccount(accountid);
+									System.out.println("Your Financial account has been deleted successfully!..");
+									break;
+								}
 							}
-
+						} catch (SQLException e1) {
+							e1.printStackTrace();
 						}
-
-					} else {
-						System.out.println("You have no financial account");
 					}
-
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -135,8 +129,6 @@ public class MainClass1 {
 					System.out.println("Income added successfully!..");
 				} catch (SQLException e) {
 					e.printStackTrace();
-				} catch (WrongInputexception e) {
-					e.printStackTrace();
 				}
 
 				break;
@@ -148,10 +140,9 @@ public class MainClass1 {
 				try {
 					incomes = IncomeManager.instance.getAllIncomes();
 					for (Income income : incomes) {
-						System.out
-								.println(String.format("Income: Amount: %.3f $\t Description:%s\t Date:%s\t  a_id:%d ",
-										income.getAmount(), income.getDescription(), income.getFormatedDate(),
-										income.getA_ID()));
+						System.out.println(String.format(
+								"Income: Amount: %.3f $\t  Description:%s\t Date:%s\t  a_id:%d ", income.getAmount(),
+								income.getDescription(), income.getFormatedDate(), income.getA_ID()));
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -178,10 +169,9 @@ public class MainClass1 {
 
 					ArrayList<Income> incomes = IncomeManager.instance.getIncomes(aid, sdate, edate);
 					for (Income income : incomes) {
-						System.out
-								.println(String.format("Income: Amount: %.3f  Description:%s Date:%s  a_id:%d  ",
-										income.getAmount(), income.getDescription(), income.getFormatedDate(),
-										income.getA_ID()));
+						System.out.println(String.format(
+								"Income: Amount: %.3f $\t  Description:%s\t Date:%s\t  a_id:%d  ", income.getAmount(),
+								income.getDescription(), income.getFormatedDate(), income.getA_ID()));
 					}
 
 				} catch (SQLException e) {
@@ -221,11 +211,7 @@ public class MainClass1 {
 					System.out.println("Outcome added successfully!..");
 				} catch (SQLException e) {
 					e.printStackTrace();
-				} catch (WrongInputexception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
-				
 
 				break;
 			}
@@ -258,9 +244,9 @@ public class MainClass1 {
 					ArrayList<Outcome> outcomes = OutcomeManager.instance.getOutcomes(cid, aid, sdate, edate);
 					for (Outcome outcome : outcomes) {
 						System.out.println(String.format(
-								"Outcome: Amount: %.3f\t  Description:%s\t Date:%s\t  C_id:%d\t  a_id:%d\t", outcome.getAmount(),
-								outcome.getDescription(), outcome.getFormatedDate(), outcome.getC_id(),
-								outcome.getA_id()));
+								"Outcome: Amount: %.3f $\t  Description:%s\t Date:%s\t  C_id:%d\t a_id:%d",
+								outcome.getAmount(), outcome.getDescription(), outcome.getFormatedDate(),
+								outcome.getC_id(), outcome.getA_id()));
 					}
 
 				} catch (SQLException e) {
@@ -275,9 +261,9 @@ public class MainClass1 {
 					outcomes = OutcomeManager.instance.getAllOutcomes();
 					for (Outcome outcome : outcomes) {
 						System.out.println(String.format(
-								"Outcome: Amount: %.3f $\t Description:%s\t Date:%s\t C_id:%d\t a_id:%d", outcome.getAmount(),
-								outcome.getDescription(), outcome.getFormatedDate(), outcome.getC_id(),
-								outcome.getA_id()));
+								"Outcome: Amount: %.3f $\t  Description:%s\t Date:%s\t  C_id:%d\t  a_id:%d",
+								outcome.getAmount(), outcome.getDescription(), outcome.getFormatedDate(),
+								outcome.getC_id(), outcome.getA_id()));
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -293,13 +279,47 @@ public class MainClass1 {
 						int month = scanner.nextInt();
 						try {
 							double Mstatics = FinancialManager.instance.TotalOutcomes(month);
-							System.out.println("total monthly outcomes are " + Mstatics);
+							System.out.println("total monthly outcomes are " + Mstatics + " $");
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
+						System.out.println("Enter (1) to get current month outcome ");
+						int currentoutcome = scanner.nextInt();
+						if (currentoutcome == 1) {
+							System.out.println("Enter category by id to ");
+							ArrayList<Category> categories = CategoryManager.instance.getAllCategories();
+							for (Category c : categories) {
+								System.out.println(String.format("%d- %s", c.getId(), c.getName()));
+							}
+
+							int cid = scanner.nextInt();
+
+							ArrayList<Account> accounts = AccountManager.instance.getAllAccounts();
+							for (Account a : accounts) {
+								System.out.println(String.format("%d- %s", a.getId(), a.getName()));
+							}
+							int aid = scanner.nextInt();
+
+							ArrayList<Outcome> outcomes;
+							try {
+								outcomes = OutcomeManager.instance.getCurrentMonthOutcomes(cid, aid);
+								for (Outcome outcome : outcomes) {
+									System.out.println(String.format(
+											"Outcome: Amount: %.3f $\t  Description:%s\t Date:%s\t  C_id:%d\t  a_id:%d",
+											outcome.getAmount(), outcome.getDescription(), outcome.getFormatedDate(),
+											outcome.getC_id(), outcome.getA_id()));
+								}
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+
+						} else {
+							System.out.println("Wrong input");
+						}
+
 					} else {
-						System.out
-								.println("statistics are locked do you want to upgrade account to permium? \"cost 5$\"");
+						System.out.println(
+								"statistics are locked do you want to upgrade account to permium? \"cost 3$\"");
 						System.out.println("Enter (1) for yes (0) for no?");
 						int choice1 = scanner.nextInt();
 						if (choice1 == 1) {

@@ -10,7 +10,7 @@ import Model.User;
 public class UserManager {
 
 	public static final UserManager instance = new UserManager();
-	private User currentUser;
+	private  User currentUser;
 
 	private UserManager() {
 
