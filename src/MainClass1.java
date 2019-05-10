@@ -127,7 +127,7 @@ public class MainClass1 {
 					Income income = new Income(amount, description, date, aid);
 					IncomeManager.instance.insertIncome(income);
 					System.out.println("Income added successfully!..");
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
@@ -209,7 +209,7 @@ public class MainClass1 {
 					Outcome o = new Outcome(amount, description, date, cid, aid);
 					OutcomeManager.instance.insertOutcome(o);
 					System.out.println("Outcome added successfully!..");
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 

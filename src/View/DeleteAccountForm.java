@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -41,10 +42,15 @@ public class DeleteAccountForm extends JFrame {
 	private static double balcnce;
 	private JTable table_1;
 	private static int id;
+	private static String listener;
 
 	/**
 	 * Launch the application.
 	 */
+	public static void infoBox(String infoMessage, String titleBar) {
+		JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	public static void addRowToTable() {
 
 		try {
@@ -100,7 +106,14 @@ public class DeleteAccountForm extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					AccountManager.instance.deleteAccount(id);
+					if (listener != null) {
+						AccountManager.instance.deleteAccount(id);
+						infoBox("Account deleted succsessfully", "");
+						listener = null;
+					} else {
+						infoBox("Pleas add account's id to delete", "");
+
+					}
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -142,6 +155,7 @@ public class DeleteAccountForm extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				listener = textField.getText();
 				id = Integer.parseInt(textField.getText().trim());
 			}
 		});
@@ -194,7 +208,7 @@ public class DeleteAccountForm extends JFrame {
 		label_3.setFont(new Font("Pristina", Font.PLAIN, 18));
 		label_3.setBounds(65, 83, 86, 26);
 		panel.add(label_3);
-		label_3.setText(UserManager.instance.getCurrentUser().getName());
+		// label_3.setText(UserManager.instance.getCurrentUser().getName());
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("Pristina", Font.BOLD, 14));
@@ -203,40 +217,39 @@ public class DeleteAccountForm extends JFrame {
 		try {
 			balcnce = FinancialManager.instance.getBalance();
 			lblNewLabel.setText(balcnce + " $");
-
-			table_1 = new JTable();
-			table_1.setFont(new Font("Pristina", Font.BOLD, 14));
-			table_1.setBackground(new Color(0, 250, 154));
-			table_1.setForeground(new Color(255, 255, 255));
-			table_1.setModel(new DefaultTableModel(new Object[][] { { "AccountID", "AccountName", "UserID" }, },
-					new String[] { "New column", "New column", "New column" }));
-			table_1.setBounds(456, 85, 268, 16);
-			contentPane.add(table_1);
-
-			JButton btnNewButton_1 = new JButton("ShowData");
-			btnNewButton_1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					addRowToTable();
-				}
-			});
-			btnNewButton_1.setBounds(504, 283, 89, 23);
-			contentPane.add(btnNewButton_1);
-
-			JButton btnNewButton_2 = new JButton("Clear");
-			btnNewButton_2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					table.setModel(new DefaultTableModel(null, new String[] { "s", "", "" }));
-
-				}
-
-			});
-			btnNewButton_2.setBounds(617, 283, 89, 23);
-			contentPane.add(btnNewButton_2);
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		table_1 = new JTable();
+		table_1.setFont(new Font("Pristina", Font.BOLD, 14));
+		table_1.setBackground(new Color(0, 250, 154));
+		table_1.setForeground(new Color(255, 255, 255));
+		table_1.setModel(new DefaultTableModel(new Object[][] { { "AccountID", "AccountName", "UserID" }, },
+				new String[] { "New column", "New column", "New column" }));
+		table_1.setBounds(456, 85, 268, 16);
+		contentPane.add(table_1);
+
+		JButton btnNewButton_1 = new JButton("ShowData");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addRowToTable();
+			}
+		});
+		btnNewButton_1.setBounds(504, 283, 89, 23);
+		contentPane.add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("Clear");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				table.setModel(new DefaultTableModel(null, new String[] { "s", "", "" }));
+
+			}
+
+		});
+		btnNewButton_2.setBounds(617, 283, 89, 23);
+		contentPane.add(btnNewButton_2);
 
 	}
 }

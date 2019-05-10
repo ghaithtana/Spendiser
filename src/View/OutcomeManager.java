@@ -47,7 +47,7 @@ public class OutcomeManager extends JFrame {
 	 */
 	public OutcomeManager() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 569, 553);
+		setBounds(100, 100, 554, 553);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 250, 154));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,7 @@ public class OutcomeManager extends JFrame {
 			}
 		});
 		btnNewButton.setBackground(new Color(230, 230, 250));
-		btnNewButton.setIcon(new ImageIcon(OutcomeManager.class.getResource("/View/images/outcome.png")));
+		btnNewButton.setIcon(new ImageIcon(OutcomeManager.class.getResource("/View/images/outcome1.png")));
 		btnNewButton.setFont(new Font("Pristina", Font.BOLD, 14));
 		btnNewButton.setBounds(251, 118, 141, 88);
 		contentPane.add(btnNewButton);
@@ -147,16 +147,19 @@ public class OutcomeManager extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_3.setText(balance + " $");
-			
+
 			JButton button = new JButton("");
 			button.setIcon(new ImageIcon(OutcomeManager.class.getResource("/View/images/left-arrow.png")));
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					dispose();
+					Mainmenu mu = new Mainmenu();
+					mu.setVisible(true);
 				}
 			});
 			button.setBounds(237, 0, 54, 40);
 			contentPane.add(button);
-			
+
 			JLabel label_4 = new JLabel("Back");
 			label_4.setForeground(Color.WHITE);
 			label_4.setFont(new Font("Pristina", Font.BOLD, 14));

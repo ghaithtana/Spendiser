@@ -88,8 +88,13 @@ public class AddAccountForm extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Account account = new Account(accountName, UserManager.instance.getCurrentUser().getU_ID());
 				try {
-					AccountManager.instance.insertAccount(account);
-					infoBox("Congrats Financial Account added succesfully!", "");
+					if (accountName != null) {
+						AccountManager.instance.insertAccount(account);
+						infoBox("Congrats Financial Account added succesfully!", "");
+					} else {
+						infoBox("Please add account's name", "");
+
+					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -109,7 +114,7 @@ public class AddAccountForm extends JFrame {
 			}
 		});
 		button.setIcon(new ImageIcon(AddAccountForm.class.getResource("/View/images/left-arrow.png")));
-		button.setBounds(221, 0, 54, 38);
+		button.setBounds(201, 0, 54, 38);
 		contentPane.add(button);
 
 		JLabel lblAddAccount = new JLabel("Add Account");
@@ -121,7 +126,7 @@ public class AddAccountForm extends JFrame {
 		JLabel lblBack = new JLabel("Back");
 		lblBack.setForeground(new Color(255, 255, 255));
 		lblBack.setFont(new Font("Pristina", Font.BOLD, 14));
-		lblBack.setBounds(231, 49, 32, 32);
+		lblBack.setBounds(211, 49, 32, 32);
 		contentPane.add(lblBack);
 
 		JPanel panel = new JPanel();

@@ -8,7 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.FinancialManager;
+import Controller.IncomeManager;
+import Controller.OutcomeManager;
 import Controller.UserManager;
+import Model.Income;
+import Model.Outcome;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -19,12 +23,15 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class IncomeManagerForm extends JFrame {
 
 	private JPanel contentPane;
 	private static double balance;
+	private static double balance2;
+	private static double balance1;
 
 	/**
 	 * Launch the application.
@@ -135,7 +142,7 @@ public class IncomeManagerForm extends JFrame {
 		JLabel label_2 = new JLabel("");
 		label_2.setForeground(new Color(0, 250, 154));
 		label_2.setFont(new Font("Pristina", Font.PLAIN, 18));
-		label_2.setBounds(65, 81, 86, 26);
+		label_2.setBounds(78, 86, 86, 26);
 		panel.add(label_2);
 		label_2.setText(UserManager.instance.getCurrentUser().getName());
 
@@ -146,12 +153,37 @@ public class IncomeManagerForm extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_3.setText(balance + " $");
-			
+
+			ArrayList<Income> in = new ArrayList<Income>();
+			in = IncomeManager.instance.getAllIncomes();
+			for (int i = 0; i < in.size(); i++) {
+				balance1 = 0;
+				balance1 = balance1 + in.get(i).getAmount();
+
+			}
+			ArrayList<Outcome> outcomes = new ArrayList<Outcome>();
+			outcomes = OutcomeManager.instance.getAllOutcomes();
+			for (int i = 0; i < outcomes.size(); i++) {
+				balance2 = 0;
+				balance2 = balance2 + in.get(i).getAmount();
+
+			}
+			if (balance2 == 0) {
+				label_3.setText(balance1 + " $");
+			}
+
 			JButton button = new JButton("");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					Mainmenu mm = new Mainmenu();
+					mm.setVisible(true);
+				}
+			});
 			button.setIcon(new ImageIcon(IncomeManagerForm.class.getResource("/View/images/left-arrow.png")));
 			button.setBounds(235, 0, 54, 40);
 			contentPane.add(button);
-			
+
 			JLabel label_4 = new JLabel("Back");
 			label_4.setForeground(Color.WHITE);
 			label_4.setFont(new Font("Pristina", Font.BOLD, 14));

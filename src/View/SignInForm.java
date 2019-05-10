@@ -108,7 +108,6 @@ public class SignInForm extends JFrame {
 		btnSingIn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				AccountManagerForm acc;
 				JLabel lblNewLabel_3 = new JLabel("Wrong username or password");
 				lblNewLabel_3.setFont(new Font("Pristina", Font.BOLD, 17));
 				lblNewLabel_3.setForeground(new Color(255, 0, 0));
@@ -119,9 +118,9 @@ public class SignInForm extends JFrame {
 					User user;
 					user = UserManager.instance.signIn(username, password);
 					if (user != null) {
-						acc = new AccountManagerForm();
+						Mainmenu mm = new Mainmenu();
 						frame.setVisible(false);
-						acc.setVisible(true);
+						mm.setVisible(true);
 
 					} else {
 						lblNewLabel_3.setVisible(true);
@@ -135,7 +134,7 @@ public class SignInForm extends JFrame {
 		JButton button = new JButton("Register");
 		button.setFont(new Font("Pristina", Font.BOLD, 14));
 		button.setBackground(new Color(0, 250, 154));
-		button.setBounds(487, 440, 87, 29);
+		button.setBounds(486, 444, 88, 25);
 		contentPane.add(button);
 
 		JLabel lblOrYouCan = new JLabel("Don't have account?");
