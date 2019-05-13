@@ -44,6 +44,7 @@ public class DisplayAllIncomes extends JFrame {
 	private JTable table_1;
 	private JLabel label_4;
 	private static double balance;
+	private JLabel label_5;
 
 	public static void addRowToTable() {
 
@@ -164,6 +165,11 @@ public class DisplayAllIncomes extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_4.setText(balance + " $");
+			
+			label_5 = new JLabel("");
+			label_5.setIcon(new ImageIcon(DisplayAllIncomes.class.getResource("/View/images/cash.png")));
+			label_5.setBounds(114, 177, 86, 41);
+			panel.add(label_5);
 
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

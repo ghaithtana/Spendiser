@@ -208,7 +208,7 @@ public class DeleteAccountForm extends JFrame {
 		label_3.setFont(new Font("Pristina", Font.PLAIN, 18));
 		label_3.setBounds(65, 83, 86, 26);
 		panel.add(label_3);
-		// label_3.setText(UserManager.instance.getCurrentUser().getName());
+		label_3.setText(UserManager.instance.getCurrentUser().getName());
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setFont(new Font("Pristina", Font.BOLD, 14));
@@ -217,6 +217,11 @@ public class DeleteAccountForm extends JFrame {
 		try {
 			balcnce = FinancialManager.instance.getBalance();
 			lblNewLabel.setText(balcnce + " $");
+
+			JLabel label_4 = new JLabel("");
+			label_4.setIcon(new ImageIcon(DeleteAccountForm.class.getResource("/View/images/cash.png")));
+			label_4.setBounds(123, 178, 86, 41);
+			panel.add(label_4);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

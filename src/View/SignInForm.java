@@ -132,6 +132,14 @@ public class SignInForm extends JFrame {
 		});
 
 		JButton button = new JButton("Register");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Signupform sp = new Signupform();
+				sp.setVisible(true);
+				
+			}
+		});
 		button.setFont(new Font("Pristina", Font.BOLD, 14));
 		button.setBackground(new Color(0, 250, 154));
 		button.setBounds(486, 444, 88, 25);

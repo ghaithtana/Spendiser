@@ -147,6 +147,11 @@ public class OutcomeManager extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_3.setText(balance + " $");
+			
+			JLabel label_5 = new JLabel("");
+			label_5.setIcon(new ImageIcon(OutcomeManager.class.getResource("/View/images/cash.png")));
+			label_5.setBounds(106, 181, 86, 41);
+			panel.add(label_5);
 
 			JButton button = new JButton("");
 			button.setIcon(new ImageIcon(OutcomeManager.class.getResource("/View/images/left-arrow.png")));

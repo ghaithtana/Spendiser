@@ -40,6 +40,7 @@ public class AccountManagerForm extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JButton button_1;
 	private JLabel label_2;
+	private JLabel label_3;
 
 	/**
 	 * Launch the application.
@@ -143,6 +144,11 @@ public class AccountManagerForm extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			lblNewLabel_1.setText(balance + " $");
+			
+			label_3 = new JLabel("");
+			label_3.setIcon(new ImageIcon(AccountManagerForm.class.getResource("/View/images/cash.png")));
+			label_3.setBounds(114, 169, 86, 41);
+			panel.add(label_3);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

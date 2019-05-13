@@ -162,6 +162,11 @@ public class AddAccountForm extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			lblNewLabel_1.setText(balance + " $");
+			
+			JLabel label_2 = new JLabel("");
+			label_2.setIcon(new ImageIcon(AddAccountForm.class.getResource("/View/images/cash.png")));
+			label_2.setBounds(108, 179, 86, 41);
+			panel.add(label_2);
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();

@@ -17,6 +17,7 @@ import Model.Category;
 import Model.Outcome;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -64,6 +65,10 @@ public class InsertOutcomeForm extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public static void infoBox(String infoMessage, String titleBar) {
+		JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	public static void addCategory() {
 
 		try {
@@ -189,14 +194,8 @@ public class InsertOutcomeForm extends JFrame {
 		});
 
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column"
-			}
-		));
+		table.setModel(new DefaultTableModel(new Object[][] { { null, null, null }, },
+				new String[] { "New column", "New column", "New column" }));
 		table.setFont(new Font("Pristina", Font.BOLD, 14));
 		table.setBounds(343, 89, 306, 212);
 		contentPane.add(table);
@@ -206,7 +205,7 @@ public class InsertOutcomeForm extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				View.OutcomeManager outcome= new View.OutcomeManager();
+				View.OutcomeManager outcome = new View.OutcomeManager();
 				outcome.setVisible(true);
 			}
 		});
@@ -249,6 +248,7 @@ public class InsertOutcomeForm extends JFrame {
 						Date date1 = Utils.stringToDate(sdate);
 						Outcome o = new Outcome(amount, description, date1, categoryid, accountid);
 						OutcomeManager.instance.insertOutcome(o);
+						infoBox("Outcome inserted successfuly!", "");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -270,14 +270,8 @@ public class InsertOutcomeForm extends JFrame {
 		contentPane.add(lblInsertIncome);
 
 		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-			},
-			new String[] {
-				"New column", "New column"
-			}
-		));
+		table_1.setModel(
+				new DefaultTableModel(new Object[][] { { null, null }, }, new String[] { "New column", "New column" }));
 		table_1.setBounds(343, 386, 250, 197);
 		contentPane.add(table_1);
 

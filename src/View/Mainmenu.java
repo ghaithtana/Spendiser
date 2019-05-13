@@ -6,10 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controller.UserManager;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -90,6 +94,23 @@ public class Mainmenu extends JFrame {
 		JButton button_2 = new JButton("");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				try {
+					if (UserManager.instance.checkPremium(UserManager.instance.getCurrentUser()) == false) {
+
+						dispose();
+						UpgradeUser up = new UpgradeUser();
+						up.setVisible(true);
+					} else if (UserManager.instance.checkPremium(UserManager.instance.getCurrentUser()) == true) {
+
+						dispose();
+						StatisticsForm sf = new StatisticsForm();
+						sf.setVisible(true);
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		button_2.setBackground(new Color(230, 230, 250));

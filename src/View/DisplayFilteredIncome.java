@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.AccountManager;
 import Controller.FinancialManager;
 import Controller.IncomeManager;
+import Controller.UserManager;
 import Controller.Utils;
 import Model.Account;
 import Model.Income;
@@ -245,6 +246,7 @@ public class DisplayFilteredIncome extends JFrame {
 		label_3.setFont(new Font("Pristina", Font.PLAIN, 18));
 		label_3.setBounds(53, 92, 86, 26);
 		panel.add(label_3);
+		label_3.setText(UserManager.instance.getCurrentUser().getName());
 
 		JLabel label_7 = new JLabel("0.0 $");
 		label_7.setFont(new Font("Pristina", Font.BOLD, 14));
@@ -253,6 +255,11 @@ public class DisplayFilteredIncome extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_7.setText(balance + " $");
+
+			JLabel label_4 = new JLabel("");
+			label_4.setIcon(new ImageIcon(DisplayFilteredIncome.class.getResource("/View/images/cash.png")));
+			label_4.setBounds(99, 190, 86, 41);
+			panel.add(label_4);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

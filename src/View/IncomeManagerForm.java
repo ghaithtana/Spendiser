@@ -153,6 +153,11 @@ public class IncomeManagerForm extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_3.setText(balance + " $");
+			
+			JLabel label_5 = new JLabel("");
+			label_5.setIcon(new ImageIcon(IncomeManagerForm.class.getResource("/View/images/cash.png")));
+			label_5.setBounds(110, 177, 86, 41);
+			panel.add(label_5);
 
 			ArrayList<Income> in = new ArrayList<Income>();
 			in = IncomeManager.instance.getAllIncomes();

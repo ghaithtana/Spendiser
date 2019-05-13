@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -54,6 +55,9 @@ public class InsertIncomeForm extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public static void infoBox(String infoMessage, String titleBar) {
+		JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	}
 	public static void addAccounts() {
 
 		try {
@@ -211,6 +215,8 @@ public class InsertIncomeForm extends JFrame {
 						Date date1 = Utils.stringToDate(sdate);
 						Income i = new Income(amount, description, date1, aid);
 						IncomeManager.instance.insertIncome(i);
+						infoBox("Income inserted successfuly!", "");
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

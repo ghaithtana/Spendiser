@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.FinancialManager;
 import Controller.IncomeManager;
 import Controller.OutcomeManager;
+import Controller.UserManager;
 import Model.Income;
 import Model.Outcome;
 
@@ -42,6 +43,7 @@ public class DisplayAllOutcomes extends JFrame {
 	private JLabel label_4;
 	private JLabel label_5;
 	private static double balance;
+	private JLabel label_6;
 
 	/**
 	 * Launch the application.
@@ -149,6 +151,7 @@ public class DisplayAllOutcomes extends JFrame {
 		label_3.setFont(new Font("Pristina", Font.PLAIN, 18));
 		label_3.setBounds(65, 81, 86, 26);
 		panel.add(label_3);
+		label_3.setText(UserManager.instance.getCurrentUser().getName());
 
 		label_5 = new JLabel("0.0 $");
 		label_5.setFont(new Font("Pristina", Font.BOLD, 14));
@@ -157,6 +160,11 @@ public class DisplayAllOutcomes extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_5.setText(balance + " $");
+
+			label_6 = new JLabel("");
+			label_6.setIcon(new ImageIcon(DisplayAllOutcomes.class.getResource("/View/images/cash.png")));
+			label_6.setBounds(108, 179, 86, 41);
+			panel.add(label_6);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

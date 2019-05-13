@@ -26,6 +26,7 @@ import Controller.CategoryManager;
 import Controller.FinancialManager;
 import Controller.IncomeManager;
 import Controller.OutcomeManager;
+import Controller.UserManager;
 import Controller.Utils;
 import Model.Account;
 import Model.Category;
@@ -64,6 +65,7 @@ public class DisplayFilteredOutcome extends JFrame {
 	private static String listener1;
 	private static String listener2;
 	private static double balance;
+	private JLabel label_6;
 
 	/**
 	 * Launch the application.
@@ -323,6 +325,7 @@ public class DisplayFilteredOutcome extends JFrame {
 		label_3.setFont(new Font("Pristina", Font.PLAIN, 18));
 		label_3.setBounds(53, 92, 86, 26);
 		panel.add(label_3);
+		label_3.setText(UserManager.instance.getCurrentUser().getName());
 
 		label_4 = new JLabel("0.0 $");
 		label_4.setFont(new Font("Pristina", Font.BOLD, 14));
@@ -331,6 +334,11 @@ public class DisplayFilteredOutcome extends JFrame {
 		try {
 			balance = FinancialManager.instance.getBalance();
 			label_4.setText(balance + " $");
+
+			label_6 = new JLabel("");
+			label_6.setIcon(new ImageIcon(DisplayFilteredOutcome.class.getResource("/View/images/cash.png")));
+			label_6.setBounds(102, 196, 86, 41);
+			panel.add(label_6);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
